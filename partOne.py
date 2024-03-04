@@ -1,34 +1,28 @@
 #Day 2: Cube Conundrum
 
-list_of_games: list[int] = []
-
 with open("input.txt", 'r') as puzzel_file:
+    sum_ofIDs: int = 0
     counter: int = 0
     for line in puzzel_file:
-        lst_ofColor: list[str] = line.replace(';', ' ;').replace(",", " ").strip().split()[2::][::-1]
-        lst_ofColor.append(";")
+        lst_ofColor: list[str] = line.replace(';', ' ').replace(",", " ").strip().split()[2::][::-1]
         counter += 1
         
-        tmp: list[str] = []
-        checking_eachSet: int = 0
-        for i in lst_ofColor: 
-            if i == ';' :
-                for k, v in zip(tmp[::2], tmp[1::2]):
-                    match k:
-                        case "green":
-                            checking_eachSet += 0 if int(v) <= 13 else 1
-                        case "red":
-                            checking_eachSet += 0 if int(v) <= 12 else 1
-                        case "blue":
-                            checking_eachSet += 0 if int(v) <= 14 else 1
-
-                tmp.clear()     
-                continue
-
-            tmp.append(i)
+        checking_eachSet: bool = True
+        for k, v in zip(lst_ofColor[::2], lst_ofColor[1::2]):
+            print(k, v)
+            match k:
+                case "green":
+                    checking_eachSet = True if int(v) <= 13 else False 
+                    if checking_eachSet == False: break
+                case "red":
+                    checking_eachSet = True if int(v) <= 12 else False
+                    if checking_eachSet == False: break
+                case "blue":
+                    checking_eachSet = True if int(v) <= 14 else False
+                    if checking_eachSet == False: break
   
-        if checking_eachSet == 0:
-            list_of_games.append(counter)
+        if checking_eachSet == True:
+            sum_ofIDs += counter
             
-    print(sum(list_of_games))
+    print(sum_ofIDs)
 
