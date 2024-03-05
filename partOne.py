@@ -9,19 +9,18 @@ with open("input.txt", 'r') as puzzel_file:
         
         checking_eachSet: bool = True
         for k, v in zip(lst_ofColor[::2], lst_ofColor[1::2]):
-            print(k, v)
             match k:
                 case "green":
                     checking_eachSet = True if int(v) <= 13 else False 
-                    if checking_eachSet == False: break
+                    if not checking_eachSet: break
                 case "red":
                     checking_eachSet = True if int(v) <= 12 else False
-                    if checking_eachSet == False: break
+                    if not checking_eachSet: break
                 case "blue":
                     checking_eachSet = True if int(v) <= 14 else False
-                    if checking_eachSet == False: break
+                    if not checking_eachSet: break
   
-        if checking_eachSet == True:
+        if checking_eachSet:
             sum_ofIDs += counter
             
     print(sum_ofIDs)
